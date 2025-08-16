@@ -1,0 +1,3455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDO Café - Cita Rasa Nusantara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap">
+    <style>
+        :root {
+            --primary: #6f4e37; /* Warna cokelat kopi */
+            --secondary: #c8102e; /* Warna merah ulos */
+            --accent: #e6b325; /* Warna aksen emas */
+            --light: #f8f4e9; /* Warna latar light */
+            --dark: #2c2416; /* Warna teks gelap */
+            --green: #4a7c59; /* Warna tanaman tropis */
+            --blue: #2c5fa8; /* Warna untuk fitur baru */
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #faf6ed;
+            color: var(--dark);
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%23f8f4e9"/><path d="M0,50 Q25,25 50,50 T100,50" fill="none" stroke="%23e6d9c2" stroke-width="1" opacity="0.3"/></svg>');
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigasi */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #5a3927 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 10px rgba(200, 16, 46, 0.3);
+        }
+        
+        .logo::before {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid var(--secondary);
+            border-top-color: transparent;
+            border-right-color: transparent;
+            transform: rotate(-45deg);
+        }
+        
+        .logo::after {
+            content: "☕";
+            font-size: 28px;
+            color: var(--primary);
+        }
+        
+        .brand h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .brand p {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 30px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after, nav a.active::after {
+            width: 70%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 36, 22, 0.7), rgba(44, 36, 22, 0.7)), 
+                        url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%235a3927"/><path d="M0,20 Q30,0 50,20 T100,20 L100,80 Q70,100 50,80 T0,80 Z" fill="%236f4e37" opacity="0.4"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+        }
+        
+        .cta-button:hover {
+            background: #ffcc33;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            border-color: var(--dark);
+        }
+        
+        /* Menu Section */
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+            padding-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            font-size: 1rem;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .menu-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-image {
+            height: 200px;
+            background: linear-gradient(45deg, #e6d9c2, #d2b48c);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .menu-image i {
+            font-size: 5rem;
+            color: var(--primary);
+            opacity: 0.3;
+        }
+        
+        .favorite-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: #ccc;
+            z-index: 10;
+        }
+        
+        .favorite-btn.active {
+            color: var(--secondary);
+        }
+        
+        .favorite-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .menu-content {
+            padding: 20px;
+        }
+        
+        .menu-category {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .menu-title {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .menu-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .menu-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .rating-stars {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .order-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .order-btn:hover {
+            background: #5a3927;
+        }
+        
+        /* Order Section */
+        .order-section {
+            background: linear-gradient(to bottom, #f8f4e9, #e6d9c2);
+            padding: 4rem 2rem;
+        }
+        
+        .order-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+        
+        .order-header h2 {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .order-steps {
+            display: flex;
+            justify-content: space-around;
+            padding: 2rem;
+            background: #f0e9d9;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 200px;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .step h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .step p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .order-form {
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0d4bc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .submit-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(200, 16, 46, 0.3);
+        }
+        
+        .submit-btn:hover {
+            background: #a50d24;
+        }
+        
+        /* Promo Section */
+        .promo-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(to right, #6f4e37, #5a3927);
+            color: white;
+        }
+        
+        .promo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .promo-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+        
+        .promo-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .promo-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(230,179,37,0.1) 0%, rgba(230,179,37,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .promo-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .promo-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .promo-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .promo-card p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .promo-code {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        /* Cart Section */
+        .cart-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: none;
+        }
+        
+        .cart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .cart-item-price {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .cart-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .cart-total {
+            text-align: right;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: var(--secondary);
+        }
+        
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        
+        .cart-btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .continue-shopping {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .checkout-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+        }
+        
+        /* Favorite Section */
+        .favorite-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom, #f8f4e9, #e6d9c2);
+            display: none;
+        }
+        
+        .favorite-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .favorite-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .favorite-header h2 {
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .favorite-header h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .favorite-empty {
+            text-align: center;
+            padding: 3rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .favorite-empty i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 4rem 2rem;
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            height: 400px;
+            background: linear-gradient(45deg, #d2b48c, #a67b5b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .footer-section p, .footer-section li {
+            margin-bottom: 10px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li::before {
+            content: "•";
+            color: var(--accent);
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+        
+        /* Cart & Favorite Icons */
+        .action-icons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 999;
+        }
+        
+        .action-icon {
+            background: var(--secondary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(200, 16, 46, 0.4);
+            transition: var(--transition);
+        }
+        
+        .action-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .action-icon.favorite-icon {
+            background: var(--primary);
+        }
+        
+        .action-icon.profile-icon {
+            background: var(--blue);
+        }
+        
+        .icon-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: var(--dark);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalOpen 0.4s ease;
+        }
+        
+        @keyframes modalOpen {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+            z-index: 10;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .modal-image {
+            height: 250px;
+            background: linear-gradient(45deg, #d2b48c, #a67b5b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 5rem;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        .modal-category {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-description {
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        
+        .modal-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .modal-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .modal-tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .reviews-container {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .review {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .review:last-child {
+            border-bottom: none;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .review-user {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .review-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .review-stars {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .review-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .add-review-form {
+            margin-top: 2rem;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .modal-add {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+        
+        .modal-close {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        /* Login/Register Modal */
+        .auth-modal .modal-content {
+            max-width: 500px;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            background: #f0f0f0;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .auth-tab:first-child {
+            border-radius: 15px 0 0 0;
+        }
+        
+        .auth-tab:last-child {
+            border-radius: 0 15px 0 0;
+        }
+        
+        .auth-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Profile Section */
+        .profile-section {
+            padding: 4rem 2rem;
+            display: none;
+        }
+        
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .profile-header h2 {
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .profile-email {
+            opacity: 0.9;
+        }
+        
+        .profile-body {
+            padding: 2rem;
+        }
+        
+        .profile-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .profile-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .profile-tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .profile-content {
+            display: none;
+        }
+        
+        .profile-content.active {
+            display: block;
+        }
+        
+        .order-history {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .order-history th, .order-history td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-history th {
+            background: #f8f4e9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .order-history tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Map Section */
+        .map-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom, #e6d9c2, #d2b48c);
+        }
+        
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+        
+        .map-header h2 {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .map-content {
+            height: 400px;
+            background: #e0d4bc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .map-info {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .map-info-item {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .map-info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        
+        .map-info-content h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        /* Reservation Section */
+        .reservation-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom, #f8f4e9, #e6d9c2);
+        }
+        
+        .reservation-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .reservation-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+        
+        .reservation-header h2 {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .reservation-form {
+            padding: 2rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .menu-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .order-steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .cart-actions {
+                flex-direction: column;
+            }
+            
+            .action-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        
+        /* New Styles for Enhanced Features */
+        .stats-section {
+            padding: 4rem 2rem;
+            background-color: var(--light);
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-title {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        
+        .newsletter-section {
+            padding: 4rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-btn {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-btn:hover {
+            background: #ffcc33;
+        }
+        
+        .gallery-section {
+            padding: 4rem 2rem;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .featured-section {
+            padding: 4rem 2rem;
+            background: var(--light);
+        }
+        
+        .featured-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .featured-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .featured-image {
+            height: 200px;
+            background: linear-gradient(45deg, #d2b48c, #a67b5b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .featured-content {
+            padding: 20px;
+        }
+        
+        .featured-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .featured-desc {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .featured-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Action Icons -->
+    <div class="action-icons">
+        <div class="action-icon favorite-icon">
+            <i class="fas fa-heart"></i>
+            <div class="icon-count" id="favoriteCount">0</div>
+        </div>
+        <div class="action-icon cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <div class="icon-count" id="cartCount">0</div>
+        </div>
+        <div class="action-icon profile-icon">
+            <i class="fas fa-user"></i>
+        </div>
+    </div>
+
+    <!-- Header & Navigasi -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo"></div>
+                <div class="brand">
+                    <h1>IDO Café</h1>
+                    <p>Cita Rasa Nusantara, Hangat di Setiap Cangkir</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Beranda</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#reservation">Reservasi</a></li>
+                    <li><a href="#promo">Promo</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                    <li><a href="#map">Lokasi</a></li>
+                    <li><a href="#about">Tentang Kami</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Nikmati Kehangatan Kopi Nusantara</h2>
+            <p>IDO Café menghadirkan cita rasa kopi premium dari tanah Sumatera Utara dengan suasana modern tropical yang menenangkan. Rasakan kehangatan kopi Sidikalang dan keharuman kopi Samosir dalam setiap tegukan.</p>
+            <a href="#reservation" class="cta-button">Reservasi Meja <i class="fas fa-calendar-check"></i></a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="section-title">
+            <h2>IDO Café dalam Angka</h2>
+        </div>
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-coffee"></i>
+                </div>
+                <div class="stat-number">50+</div>
+                <div class="stat-title">Jenis Kopi & Minuman</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number">15.000+</div>
+                <div class="stat-title">Pelanggan Setia</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="stat-number">7</div>
+                <div class="stat-title">Cabang di Indonesia</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="stat-number">12</div>
+                <div class="stat-title">Penghargaan</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <div class="section-title">
+            <h2>Menu Kami</h2>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" id="searchBox" placeholder="Cari menu favoritmu...">
+        </div>
+        
+        <div class="filters">
+            <button class="filter-btn active" data-category="all">Semua</button>
+            <button class="filter-btn" data-category="kopi">Kopi</button>
+            <button class="filter-btn" data-category="minuman">Minuman Non-Kopi</button>
+            <button class="filter-btn" data-category="makanan">Makanan Berat</button>
+            <button class="filter-btn" data-category="snack">Snack</button>
+        </div>
+        
+        <div class="menu-container" id="menuContainer">
+            <!-- Menu items will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="section-title">
+            <h2>Galeri Kami</h2>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Coffee Making">
+                <div class="gallery-overlay">
+                    Proses Pembuatan Kopi Spesial
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1554119921-6c8e3b49e7f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cafe Interior">
+                <div class="gallery-overlay">
+                    Interior Modern IDO Café
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Coffee Beans">
+                <div class="gallery-overlay">
+                    Biji Kopi Pilihan
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1463797221720-6b07e9946aa7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Coffee Art">
+                <div class="gallery-overlay">
+                    Seni Kopi (Latte Art)
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="reservation-section">
+        <div class="section-title">
+            <h2>Reservasi Meja</h2>
+        </div>
+        
+        <div class="reservation-container">
+            <div class="reservation-header">
+                <h2>Reservasi IDO Café</h2>
+            </div>
+            
+            <form id="reservationForm" class="reservation-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="resName">Nama Lengkap</label>
+                        <input type="text" id="resName" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resPhone">Nomor Telepon</label>
+                        <input type="tel" id="resPhone" placeholder="Masukkan nomor telepon" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="resDate">Tanggal Reservasi</label>
+                        <input type="date" id="resDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resTime">Waktu Reservasi</label>
+                        <input type="time" id="resTime" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="resGuests">Jumlah Tamu</label>
+                        <select id="resGuests" required>
+                            <option value="1">1 Orang</option>
+                            <option value="2">2 Orang</option>
+                            <option value="3">3 Orang</option>
+                            <option value="4">4 Orang</option>
+                            <option value="5">5 Orang</option>
+                            <option value="6">6+ Orang</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resType">Tipe Meja</label>
+                        <select id="resType" required>
+                            <option value="standard">Standard</option>
+                            <option value="window">Near Window</option>
+                            <option value="private">Private Booth</option>
+                            <option value="outdoor">Outdoor</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="resNotes">Catatan Tambahan</label>
+                    <textarea id="resNotes" rows="3" placeholder="Permintaan khusus atau catatan lainnya"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Reservasi Sekarang</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order" class="order-section">
+        <div class="section-title">
+            <h2>Pesan Sekarang</h2>
+        </div>
+        
+        <div class="order-container">
+            <div class="order-header">
+                <h2>Pesanan IDO Café</h2>
+            </div>
+            
+            <div class="order-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Pilih Menu</h3>
+                    <p>Pilih menu favoritmu dari berbagai pilihan kopi dan makanan khas Nusantara</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Isi Form Pesanan</h3>
+                    <p>Isi data diri dan metode pengiriman sesuai kebutuhanmu</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Bayar & Nikmati</h3>
+                    <p>Lakukan pembayaran dan nikmati pesananmu dengan cepat</p>
+                </div>
+            </div>
+            
+            <form id="orderForm" class="order-form">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" id="name" placeholder="Masukkan nama lengkap" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Nomor Telepon</label>
+                    <input type="tel" id="phone" placeholder="Masukkan nomor telepon" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Alamat (untuk delivery)</label>
+                    <textarea id="address" rows="3" placeholder="Masukkan alamat lengkap untuk pengiriman"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderType">Jenis Pesanan</label>
+                    <select id="orderType" required>
+                        <option value="dine-in">Makan di Tempat</option>
+                        <option value="takeaway">Takeaway</option>
+                        <option value="delivery">Delivery</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="payment">Metode Pembayaran</label>
+                    <select id="payment" required>
+                        <option value="cash">Cash (Bayar di Tempat)</option>
+                        <option value="gopay">Gopay</option>
+                        <option value="ovo">OVO</option>
+                        <option value="dana">DANA</option>
+                        <option value="transfer">Transfer Bank</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Catatan Tambahan</label>
+                    <textarea id="notes" rows="2" placeholder="Tambahkan catatan untuk pesanan Anda"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Pesan Sekarang</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="featured-section">
+        <div class="section-title">
+            <h2>Produk Unggulan</h2>
+        </div>
+        <div class="featured-container">
+            <div class="featured-item">
+                <div class="featured-image" style="background: linear-gradient(45deg, #8B4513, #A0522D);">
+                    <i class="fas fa-mug-hot"></i>
+                </div>
+                <div class="featured-content">
+                    <h3 class="featured-title">Kopi Sidikalang Premium</h3>
+                    <p class="featured-desc">Kopi single origin dengan cita rasa bold dan aroma khas dari dataran tinggi Sidikalang.</p>
+                    <a href="#" class="featured-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="featured-item">
+                <div class="featured-image" style="background: linear-gradient(45deg, #CD5C5C, #F08080);">
+                    <i class="fas fa-cookie-bite"></i>
+                </div>
+                <div class="featured-content">
+                    <h3 class="featured-title">Pastry Khas Medan</h3>
+                    <p class="featured-desc">Pastry dengan sentuhan lokal Medan, dibuat fresh setiap hari oleh pastry chef kami.</p>
+                    <a href="#" class="featured-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="featured-item">
+                <div class="featured-image" style="background: linear-gradient(45deg, #4B0082, #9370DB);">
+                    <i class="fas fa-glass-whiskey"></i>
+                </div>
+                <div class="featured-content">
+                    <h3 class="featured-title">Signature Mocktail</h3>
+                    <p class="featured-desc">Minuman non-alkohol dengan kombinasi buah tropis khas Indonesia.</p>
+                    <a href="#" class="featured-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart" class="cart-section">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2>Keranjang Pesanan</h2>
+            </div>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            
+            <div class="cart-total">
+                Total: Rp <span id="cartTotal">0</span>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="cart-btn continue-shopping">Lanjutkan Belanja</button>
+                <button class="cart-btn checkout-btn">Proses Pesanan</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Favorite Section -->
+    <section id="favorite" class="favorite-section">
+        <div class="favorite-container">
+            <div class="favorite-header">
+                <h2>Favorit Saya</h2>
+            </div>
+            
+            <div class="menu-container" id="favoriteContainer">
+                <!-- Favorite items will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="profile-section">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="profile-name" id="profileName">Guest</div>
+                        <div class="profile-email" id="profileEmail">guest@example.com</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-body">
+                <div class="profile-tabs">
+                    <div class="profile-tab active" data-tab="orders">Riwayat Pesanan</div>
+                    <div class="profile-tab" data-tab="reservations">Reservasi</div>
+                    <div class="profile-tab" data-tab="settings">Pengaturan</div>
+                </div>
+                
+                <div class="profile-content active" id="ordersContent">
+                    <table class="order-history">
+                        <thead>
+                            <tr>
+                                <th>ID Pesanan</th>
+                                <th>Tanggal</th>
+                                <th>Menu</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderHistory">
+                            <!-- Order history will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="profile-content" id="reservationsContent">
+                    <table class="order-history">
+                        <thead>
+                            <tr>
+                                <th>ID Reservasi</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
+                                <th>Jumlah Orang</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservationHistory">
+                            <!-- Reservation history will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="profile-content" id="settingsContent">
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="editName">Nama Lengkap</label>
+                            <input type="text" id="editName" placeholder="Masukkan nama lengkap" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="editEmail">Email</label>
+                            <input type="email" id="editEmail" placeholder="Masukkan email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="editPhone">Nomor Telepon</label>
+                            <input type="tel" id="editPhone" placeholder="Masukkan nomor telepon" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="editAddress">Alamat</label>
+                            <textarea id="editAddress" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map" class="map-section">
+        <div class="section-title">
+            <h2>Lokasi Kami</h2>
+        </div>
+        
+        <div class="map-container">
+            <div class="map-header">
+                <h2>Temukan IDO Café</h2>
+            </div>
+            
+            <div class="map-content">
+                <p>Peta Lokasi IDO Café</p>
+            </div>
+            
+            <div class="map-info">
+                <div class="map-info-item">
+                    <div class="map-info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="map-info-content">
+                        <h3>Alamat</h3>
+                        <p>Jl. Nusantara Indah No. 123, Medan, Sumatera Utara</p>
+                    </div>
+                </div>
+                
+                <div class="map-info-item">
+                    <div class="map-info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="map-info-content">
+                        <h3>Jam Operasional</h3>
+                        <p>Senin-Jumat: 08.00-22.00</p>
+                        <p>Sabtu-Minggu: 07.00-23.00</p>
+                    </div>
+                </div>
+                
+                <div class="map-info-item">
+                    <div class="map-info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="map-info-content">
+                        <h3>Kontak</h3>
+                        <p>Telepon: (061) 1234-5678</p>
+                        <p>Email: info@idocafe.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Section -->
+    <section id="promo" class="promo-section">
+        <div class="section-title">
+            <h2 style="color: white;">Promo & Event</h2>
+        </div>
+        
+        <div class="promo-container">
+            <div class="promo-cards">
+                <div class="promo-card">
+                    <i class="fas fa-tags"></i>
+                    <h3>Hari Kopi Nasional</h3>
+                    <p>Diskon 20% untuk semua jenis kopi setiap hari Rabu! Nikmati kopi premium dengan harga spesial.</p>
+                    <span class="promo-code">KOPIIDO20</span>
+                </div>
+                
+                <div class="promo-card">
+                    <i class="fas fa-music"></i>
+                    <h3>Live Akustik Weekend</h3>
+                    <p>Setiap Jumat & Sabtu malam, nikmati live akustik sambil menikmati kopi dan makanan spesial kami.</p>
+                    <span class="promo-code">MUSIKIDO</span>
+                </div>
+                
+                <div class="promo-card">
+                    <i class="fas fa-award"></i>
+                    <h3>Member Loyalty Program</h3>
+                    <p>Dapatkan 1 poin untuk setiap Rp 10.000 pembelian. Tukarkan poinmu dengan hadiah menarik!</p>
+                    <span class="promo-code">MEMBERIDO</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="section-title">
+            <h2 style="color: white;">Tetap Terhubung</h2>
+        </div>
+        <div class="newsletter-container">
+            <p>Dapatkan info promo dan penawaran spesial dari IDO Café langsung ke email Anda</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Masukkan email Anda" required>
+                <button type="submit" class="newsletter-btn">Berlangganan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="section-title">
+            <h2>Tentang Kami</h2>
+        </div>
+        
+        <div class="about-container">
+            <div class="about-content">
+                <h2>IDO Café - Cita Rasa Nusantara</h2>
+                <p>IDO Café didirikan pada tahun 2018 dengan misi menghadirkan cita rasa kopi premium dari berbagai daerah di Indonesia. Kami memilih biji kopi terbaik dari tanah Sumatera Utara yang terkenal dengan kualitasnya.</p>
+                <p>Nama "IDO" berasal dari kata "Ido" dalam bahasa Batak yang berarti "cinta", mencerminkan kecintaan kami terhadap kopi dan budaya Indonesia. Setiap cangkir kopi yang kami sajikan mengandung cinta dan dedikasi terhadap cita rasa autentik Nusantara.</p>
+                <p>Kami tidak hanya menyajikan kopi, tetapi juga menciptakan pengalaman ngopi yang hangat dan berkesan. Dengan suasana modern tropical yang menenangkan, IDO Café menjadi tempat yang sempurna untuk bersantai, bekerja, atau bertemu dengan teman dan keluarga.</p>
+            </div>
+            <div class="about-image">
+                <i class="fas fa-coffee"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>IDO Café</h3>
+                <p>"Cita Rasa Nusantara, Hangat di Setiap Cangkir" - Kami menghadirkan pengalaman ngopi yang hangat dengan sentuhan khas Indonesia.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Jam Operasional</h3>
+                <ul>
+                    <li>Senin - Jumat: 08.00 - 22.00</li>
+                    <li>Sabtu - Minggu: 07.00 - 23.00</li>
+                    <li>Hari Libur: 09.00 - 21.00</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Lokasi</h3>
+                <p>Jl. Nusantara Indah No. 123</p>
+                <p>Medan, Sumatera Utara</p>
+                <p>Indonesia</p>
+                <p>Telp: (061) 1234-5678</p>
+                <p>Email: info@idocafe.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 IDO Café. All Rights Reserved. | Developed with <i class="fas fa-heart" style="color: var(--secondary);"></i> in Medan</p>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="modal-image">
+                <i class="fas fa-coffee" id="modalIcon"></i>
+            </div>
+            <div class="modal-body">
+                <span class="modal-category" id="modalCategory">Kopi</span>
+                <h2 class="modal-title" id="modalTitle">Kopi Samosir</h2>
+                <p class="modal-price" id="modalPrice">Rp 25.000</p>
+                <p class="modal-description" id="modalDescription">Single origin dengan aroma earthy & floral yang khas dari tanah vulkanik Pulau Samosir. Diproses dengan metode washed untuk menghasilkan rasa yang bersih dan kompleks.</p>
+                
+                <div class="modal-tabs">
+                    <div class="modal-tab active" data-tab="details">Detail</div>
+                    <div class="modal-tab" data-tab="reviews">Ulasan (3)</div>
+                </div>
+                
+                <div class="tab-content active" id="detailsContent">
+                    <p>Kopi Samosir dipetik dari perkebunan di ketinggian 1500 mdpl di Pulau Samosir. Proses pengolahan menggunakan metode washed yang menghasilkan rasa yang bersih dengan tingkat keasaman yang seimbang.</p>
+                    <p><strong>Rekomendasi Penyajian:</strong> Nikmati sebagai espresso atau pour over untuk mendapatkan rasa terbaik.</p>
+                    <p><strong>Karakteristik:</strong> Aroma floral, rasa buah-buahan tropis dengan aftertaste coklat.</p>
+                </div>
+                
+                <div class="tab-content" id="reviewsContent">
+                    <div class="reviews-container">
+                        <div class="review">
+                            <div class="review-header">
+                                <div class="review-user">Budi Santoso</div>
+                                <div class="review-date">15 Agustus 2023</div>
+                            </div>
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="review-content">
+                                Kopinya sangat khas dengan aroma bunga yang harum. Rasa buahnya sangat terasa, sangat cocok untuk yang suka kopi asam.
+                            </div>
+                        </div>
+                        
+                        <div class="review">
+                            <div class="review-header">
+                                <div class="review-user">Siti Rahayu</div>
+                                <div class="review-date">10 Agustus 2023</div>
+                            </div>
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-content">
+                                Kopi favorit saya di IDO Café! Aromanya sangat khas dan rasa tidak terlalu pahit. Perfect untuk pagi hari.
+                            </div>
+                        </div>
+                        
+                        <div class="review">
+                            <div class="review-header">
+                                <div class="review-user">Agus Wijaya</div>
+                                <div class="review-date">5 Agustus 2023</div>
+                            </div>
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="review-content">
+                                Rasa cukup unik, tapi mungkin kurang cocok untuk yang tidak suka kopi asam. Overall cukup bagus.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-review-form">
+                        <h3>Tambah Ulasan</h3>
+                        <div class="form-group">
+                            <div class="rating-stars">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="reviewText" placeholder="Bagikan pengalaman Anda tentang produk ini"></textarea>
+                        </div>
+                        <button class="modal-btn modal-add">Kirim Ulasan</button>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn modal-add" id="addToCartModal">Tambah ke Keranjang</button>
+                    <button class="modal-btn modal-close" id="closeModalBtn">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal auth-modal" id="authModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeAuthModal">&times;</button>
+            <div class="modal-body">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Masuk</div>
+                    <div class="auth-tab" data-tab="register">Daftar</div>
+                </div>
+                
+                <div id="loginContent">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="Masukkan email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Masukkan password" required>
+                    </div>
+                    
+                    <button class="submit-btn" id="loginBtn">Masuk</button>
+                    
+                    <p style="text-align: center; margin-top: 20px;">
+                        <a href="#" style="color: var(--primary);">Lupa password?</a>
+                    </p>
+                </div>
+                
+                <div id="registerContent" style="display: none;">
+                    <div class="form-group">
+                        <label for="registerName">Nama Lengkap</label>
+                        <input type="text" id="registerName" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" placeholder="Masukkan email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPhone">Nomor Telepon</label>
+                        <input type="tel" id="registerPhone" placeholder="Masukkan nomor telepon" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" placeholder="Buat password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Konfirmasi Password</label>
+                        <input type="password" id="registerConfirmPassword" placeholder="Konfirmasi password" required>
+                    </div>
+                    
+                    <button class="submit-btn" id="registerBtn">Daftar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Menu
+        const menuItems = [
+            { 
+                id: 1, 
+                name: "Kopi Samosir", 
+                category: "kopi", 
+                price: 25000, 
+                description: "Single origin dengan aroma earthy & floral yang khas dari tanah vulkanik Pulau Samosir.", 
+                icon: "fas fa-mug-hot",
+                details: "Kopi Samosir dipetik dari perkebunan di ketinggian 1500 mdpl di Pulau Samosir. Proses pengolahan menggunakan metode washed yang menghasilkan rasa yang bersih dengan tingkat keasaman yang seimbang.",
+                rating: 4.5,
+                reviews: [
+                    { user: "Budi Santoso", date: "15 Agustus 2023", rating: 4.5, content: "Kopinya sangat khas dengan aroma bunga yang harum. Rasa buahnya sangat terasa, sangat cocok untuk yang suka kopi asam." },
+                    { user: "Siti Rahayu", date: "10 Agustus 2023", rating: 5, content: "Kopi favorit saya di IDO Café! Aromanya sangat khas dan rasa tidak terlalu pahit. Perfect untuk pagi hari." },
+                    { user: "Agus Wijaya", date: "5 Agustus 2023", rating: 4, content: "Rasa cukup unik, tapi mungkin kurang cocok untuk yang tidak suka kopi asam. Overall cukup bagus." }
+                ]
+            },
+            { 
+                id: 2, 
+                name: "Kopi Sidikalang", 
+                category: "kopi", 
+                price: 28000, 
+                description: "Body tebal dengan rasa strong & chocolaty yang khas dari dataran tinggi Sidikalang.", 
+                icon: "fas fa-coffee",
+                rating: 4.7
+            },
+            { 
+                id: 3, 
+                name: "Es Kopi Susu Gula Aren", 
+                category: "minuman", 
+                price: 30000, 
+                description: "Perpaduan kopi pilihan, susu segar, dan gula aren asli. Nikmat dan menyegarkan.", 
+                icon: "fas fa-glass-whiskey",
+                rating: 4.8
+            },
+            { 
+                id: 4, 
+                name: "Mie Gomak", 
+                category: "makanan", 
+                price: 35000, 
+                description: "Mie lidi khas Batak dengan kuah santan rempah yang gurih, disajikan dengan ayam atau ikan.", 
+                icon: "fas fa-utensils",
+                rating: 4.6
+            },
+            { 
+                id: 5, 
+                name: "Goreng Pisang", 
+                category: "snack", 
+                price: 20000, 
+                description: "Pisang raja dibalut tepung krispi, disajikan dengan topping keju atau cokelat.", 
+                icon: "fas fa-cookie-bite",
+                rating: 4.3
+            },
+            { 
+                id: 6, 
+                name: "Teh Tarik", 
+                category: "minuman", 
+                price: 18000, 
+                description: "Teh susu khas Melayu dengan teknik tarik khas yang menghasilkan tekstur lembut dan berbuih.", 
+                icon: "fas fa-mug-hot",
+                rating: 4.4
+            },
+            { 
+                id: 7, 
+                name: "Kopi Tubruk Nusantara", 
+                category: "kopi", 
+                price: 22000, 
+                description: "Kopi tubruk tradisional dengan cita rasa khas Indonesia, disajikan dengan gula aren.", 
+                icon: "fas fa-mug-hot",
+                rating: 4.2
+            },
+            { 
+                id: 8, 
+                name: "Ayam Goreng Sambal Hijau", 
+                category: "makanan", 
+                price: 38000, 
+                description: "Ayam goreng krispi dengan sambal hijau khas Padang yang pedas menggugah selera.", 
+                icon: "fas fa-drumstick-bite",
+                rating: 4.7
+            },
+            { 
+                id: 9, 
+                name: "Kopi Toraja", 
+                category: "kopi", 
+                price: 32000, 
+                description: "Kopi khas Sulawesi dengan rasa kompleks dan aroma rempah yang khas.", 
+                icon: "fas fa-coffee",
+                rating: 4.6
+            },
+            { 
+                id: 10, 
+                name: "Klepon", 
+                category: "snack", 
+                price: 18000, 
+                description: "Jajanan tradisional dari beras ketan dengan isian gula merah, dibalut kelapa parut.", 
+                icon: "fas fa-cookie",
+                rating: 4.5
+            },
+            { 
+                id: 11, 
+                name: "Nasi Goreng Kampung", 
+                category: "makanan", 
+                price: 32000, 
+                description: "Nasi goreng sederhana dengan cita rasa rumahan, disajikan dengan telur mata sapi.", 
+                icon: "fas fa-utensil-spoon",
+                rating: 4.4
+            },
+            { 
+                id: 12, 
+                name: "Jus Alpukat", 
+                category: "minuman", 
+                price: 22000, 
+                description: "Alpukat segar dihaluskan dengan susu kental manis dan es batu.", 
+                icon: "fas fa-glass-martini-alt",
+                rating: 4.3
+            },
+            { 
+                id: 13, 
+                name: "Kopi Luwak", 
+                category: "kopi", 
+                price: 75000, 
+                description: "Kopi eksklusif dengan proses alami melalui luwak, menghasilkan cita rasa unik dan halus.", 
+                icon: "fas fa-coffee",
+                rating: 4.9
+            },
+            { 
+                id: 14, 
+                name: "Rendang Sapi", 
+                category: "makanan", 
+                price: 45000, 
+                description: "Daging sapi dimasak dengan rempah khas Minang hingga empuk dan meresap.", 
+                icon: "fas fa-utensils",
+                rating: 4.8
+            },
+            { 
+                id: 15, 
+                name: "Martabak Manis", 
+                category: "snack", 
+                price: 35000, 
+                description: "Martabak manis dengan topping keju, coklat, dan kacang tanah.", 
+                icon: "fas fa-cookie-bite",
+                rating: 4.7
+            }
+        ];
+
+        // Cart functionality
+        let cart = [];
+        let favorites = [];
+        let currentProduct = null;
+        let currentUser = null;
+        let orderHistory = [];
+        let reservationHistory = [];
+        
+        // DOM elements
+        const cartIcon = document.querySelector('.cart-icon');
+        const favoriteIcon = document.querySelector('.favorite-icon');
+        const profileIcon = document.querySelector('.profile-icon');
+        const cartCount = document.getElementById('cartCount');
+        const favoriteCount = document.getElementById('favoriteCount');
+        const cartSection = document.getElementById('cart');
+        const favoriteSection = document.getElementById('favorite');
+        const profileSection = document.getElementById('profile');
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartTotalElement = document.getElementById('cartTotal');
+        const menuContainer = document.getElementById('menuContainer');
+        const favoriteContainer = document.getElementById('favoriteContainer');
+        const searchBox = document.getElementById('searchBox');
+        const productModal = document.getElementById('productModal');
+        const closeModal = document.getElementById('closeModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalIcon = document.getElementById('modalIcon');
+        const addToCartModal = document.getElementById('addToCartModal');
+        const authModal = document.getElementById('authModal');
+        const closeAuthModal = document.getElementById('closeAuthModal');
+        const authTabs = document.querySelectorAll('.auth-tab');
+        const loginContent = document.getElementById('loginContent');
+        const registerContent = document.getElementById('registerContent');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const profileName = document.getElementById('profileName');
+        const profileEmail = document.getElementById('profileEmail');
+        const orderHistoryContainer = document.getElementById('orderHistory');
+        const reservationHistoryContainer = document.getElementById('reservationHistory');
+        const profileTabs = document.querySelectorAll('.profile-tab');
+        const profileContents = document.querySelectorAll('.profile-content');
+        const profileForm = document.getElementById('profileForm');
+        const reservationForm = document.getElementById('reservationForm');
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        // Initialize application
+        function initApp() {
+            // Load from localStorage if available
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'));
+            }
+            
+            if (localStorage.getItem('favorites')) {
+                favorites = JSON.parse(localStorage.getItem('favorites'));
+            }
+            
+            if (localStorage.getItem('user')) {
+                currentUser = JSON.parse(localStorage.getItem('user'));
+                updateProfileUI();
+            }
+            
+            if (localStorage.getItem('orderHistory')) {
+                orderHistory = JSON.parse(localStorage.getItem('orderHistory'));
+            }
+            
+            if (localStorage.getItem('reservationHistory')) {
+                reservationHistory = JSON.parse(localStorage.getItem('reservationHistory'));
+            }
+            
+            // Render menu
+            renderMenuItems(menuItems);
+            
+            // Update UI
+            updateCartUI();
+            updateFavoriteUI();
+            renderOrderHistory();
+            renderReservationHistory();
+            
+            // Set up event listeners
+            setupEventListeners();
+        }
+        
+        // Render menu items
+        function renderMenuItems(items) {
+            menuContainer.innerHTML = '';
+            
+            if (items.length === 0) {
+                menuContainer.innerHTML = '<p class="empty-cart" style="grid-column: 1/-1; text-align: center; padding: 3rem;">Tidak ada menu yang ditemukan</p>';
+                return;
+            }
+            
+            items.forEach(item => {
+                const isFavorite = favorites.includes(item.id);
+                
+                const menuCard = document.createElement('div');
+                menuCard.className = 'menu-card';
+                menuCard.dataset.category = item.category;
+                menuCard.innerHTML = `
+                    <div class="menu-image">
+                        <i class="${item.icon}"></i>
+                        <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-id="${item.id}">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="menu-content">
+                        <span class="menu-category">${item.category === 'kopi' ? 'Kopi' : item.category === 'minuman' ? 'Minuman Non-Kopi' : item.category === 'makanan' ? 'Makanan Berat' : 'Snack'}</span>
+                        <h3 class="menu-title">${item.name}</h3>
+                        <div class="rating-stars">
+                            ${renderStars(item.rating)}
+                            <span>(${item.rating})</span>
+                        </div>
+                        <p class="menu-description">${item.description}</p>
+                        <p class="menu-price">Rp ${item.price.toLocaleString()}</p>
+                        <button class="order-btn" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">Tambah ke Pesanan</button>
+                    </div>
+                `;
+                menuContainer.appendChild(menuCard);
+                
+                // Add click event to menu card
+                menuCard.addEventListener('click', (e) => {
+                    if (!e.target.closest('.favorite-btn') && !e.target.closest('.order-btn')) {
+                        showProductDetail(item);
+                    }
+                });
+            });
+            
+            // Add event listeners to favorite buttons
+            document.querySelectorAll('.favorite-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.dataset.id);
+                    toggleFavorite(id);
+                });
+            });
+            
+            // Add event listeners to order buttons
+            document.querySelectorAll('.order-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.dataset.id);
+                    const name = this.dataset.name;
+                    const price = parseInt(this.dataset.price);
+                    addToCart(id, name, price);
+                });
+            });
+        }
+        
+        // Render stars for rating
+        function renderStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === fullStars + 1 && halfStar) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            
+            return stars;
+        }
+        
+        // Render favorite items
+        function renderFavoriteItems() {
+            favoriteContainer.innerHTML = '';
+            
+            if (favorites.length === 0) {
+                favoriteContainer.innerHTML = `
+                    <div class="favorite-empty">
+                        <i class="fas fa-heart-broken"></i>
+                        <p>Anda belum menambahkan menu favorit</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const favoriteItems = menuItems.filter(item => favorites.includes(item.id));
+            renderMenuItems(favoriteItems);
+        }
+        
+        // Show product detail modal
+        function showProductDetail(item) {
+            currentProduct = item;
+            modalTitle.textContent = item.name;
+            modalCategory.textContent = item.category === 'kopi' ? 'Kopi' : item.category === 'minuman' ? 'Minuman Non-Kopi' : item.category === 'makanan' ? 'Makanan Berat' : 'Snack';
+            modalPrice.textContent = `Rp ${item.price.toLocaleString()}`;
+            modalDescription.textContent = item.description;
+            modalIcon.className = item.icon;
+            
+            // Reset tabs
+            document.querySelectorAll('.modal-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelector('.modal-tab[data-tab="details"]').classList.add('active');
+            document.getElementById('detailsContent').classList.add('active');
+            
+            productModal.style.display = 'flex';
+        }
+        
+        // Close modal
+        function closeProductModal() {
+            productModal.style.display = 'none';
+            currentProduct = null;
+        }
+        
+        // Toggle favorite
+        function toggleFavorite(id) {
+            if (!currentUser) {
+                showNotification("Silahkan login untuk menambahkan favorit!");
+                authModal.style.display = 'flex';
+                return;
+            }
+            
+            const index = favorites.indexOf(id);
+            
+            if (index === -1) {
+                favorites.push(id);
+                showNotification(`Ditambahkan ke favorit!`);
+            } else {
+                favorites.splice(index, 1);
+                showNotification(`Dihapus dari favorit!`);
+            }
+            
+            saveFavoritesToLocalStorage();
+            updateFavoriteUI();
+            renderMenuItems(menuItems);
+            
+            // If in favorite section, update the view
+            if (favoriteSection.style.display === 'block') {
+                renderFavoriteItems();
+            }
+        }
+        
+        // Add to cart
+        function addToCart(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    quantity: 1
+                });
+            }
+            
+            updateCartUI();
+            saveCartToLocalStorage();
+            showNotification(`${name} ditambahkan ke keranjang!`);
+        }
+        
+        // Update cart UI
+        function updateCartUI() {
+            // Update cart count
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Update cart items display
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">Keranjang Anda kosong</p>';
+                cartTotalElement.textContent = '0';
+                return;
+            }
+            
+            cart.forEach(item => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">Rp ${item.price.toLocaleString()}</div>
+                    </div>
+                    <div class="cart-quantity">
+                        <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                        <div class="quantity-display">${item.quantity}</div>
+                        <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+            
+            // Update total
+            const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            cartTotalElement.textContent = total.toLocaleString();
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    decreaseQuantity(id);
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    increaseQuantity(id);
+                });
+            });
+        }
+        
+        // Update favorite UI
+        function updateFavoriteUI() {
+            favoriteCount.textContent = favorites.length;
+        }
+        
+        // Update profile UI
+        function updateProfileUI() {
+            if (currentUser) {
+                profileName.textContent = currentUser.name;
+                profileEmail.textContent = currentUser.email;
+                profileSection.style.display = 'block';
+            }
+        }
+        
+        // Increase item quantity
+        function increaseQuantity(id) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity++;
+                updateCartUI();
+                saveCartToLocalStorage();
+            }
+        }
+        
+        // Decrease item quantity
+        function decreaseQuantity(id) {
+            const itemIndex = cart.findIndex(item => item.id === id);
+            if (itemIndex !== -1) {
+                const item = cart[itemIndex];
+                if (item.quantity > 1) {
+                    item.quantity--;
+                } else {
+                    cart.splice(itemIndex, 1);
+                }
+                updateCartUI();
+                saveCartToLocalStorage();
+            }
+        }
+        
+        // Save cart to localStorage
+        function saveCartToLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        
+        // Save favorites to localStorage
+        function saveFavoritesToLocalStorage() {
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // Save user to localStorage
+        function saveUserToLocalStorage() {
+            localStorage.setItem('user', JSON.stringify(currentUser));
+        }
+        
+        // Save order history to localStorage
+        function saveOrderHistoryToLocalStorage() {
+            localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+        }
+        
+        // Save reservation history to localStorage
+        function saveReservationHistoryToLocalStorage() {
+            localStorage.setItem('reservationHistory', JSON.stringify(reservationHistory));
+        }
+        
+        // Filter menu items
+        function filterMenuItems(category) {
+            if (category === 'all') {
+                renderMenuItems(menuItems);
+                return;
+            }
+            
+            const filteredItems = menuItems.filter(item => item.category === category);
+            renderMenuItems(filteredItems);
+        }
+        
+        // Search menu items
+        function searchMenuItems(query) {
+            if (!query) {
+                renderMenuItems(menuItems);
+                return;
+            }
+            
+            const lowerQuery = query.toLowerCase();
+            const filteredItems = menuItems.filter(item => 
+                item.name.toLowerCase().includes(lowerQuery) || 
+                item.description.toLowerCase().includes(lowerQuery)
+            );
+            
+            renderMenuItems(filteredItems);
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Hide and remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+        
+        // Login function
+        function login(email, password) {
+            // In a real app, this would be an API call
+            // For demo, we'll use a hardcoded user
+            if (email === 'user@example.com' && password === 'password123') {
+                currentUser = {
+                    id: 1,
+                    name: 'John Doe',
+                    email: 'user@example.com',
+                    phone: '081234567890',
+                    address: 'Jl. Contoh No. 123, Medan'
+                };
+                
+                saveUserToLocalStorage();
+                updateProfileUI();
+                authModal.style.display = 'none';
+                showNotification('Berhasil masuk!');
+                return true;
+            } else {
+                showNotification('Email atau password salah!');
+                return false;
+            }
+        }
+        
+        // Register function
+        function register(name, email, phone, password) {
+            // In a real app, this would be an API call
+            currentUser = {
+                id: Date.now(),
+                name,
+                email,
+                phone,
+                address: ''
+            };
+            
+            saveUserToLocalStorage();
+            updateProfileUI();
+            authModal.style.display = 'none';
+            showNotification('Pendaftaran berhasil!');
+            return true;
+        }
+        
+        // Render order history
+        function renderOrderHistory() {
+            orderHistoryContainer.innerHTML = '';
+            
+            if (orderHistory.length === 0) {
+                orderHistoryContainer.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 2rem;">Belum ada riwayat pesanan</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            orderHistory.forEach(order => {
+                const orderRow = document.createElement('tr');
+                orderRow.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>${order.date}</td>
+                    <td>${order.items.length} item</td>
+                    <td>Rp ${order.total.toLocaleString()}</td>
+                    <td>${order.status}</td>
+                `;
+                orderHistoryContainer.appendChild(orderRow);
+            });
+        }
+        
+        // Render reservation history
+        function renderReservationHistory() {
+            reservationHistoryContainer.innerHTML = '';
+            
+            if (reservationHistory.length === 0) {
+                reservationHistoryContainer.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 2rem;">Belum ada riwayat reservasi</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            reservationHistory.forEach(reservation => {
+                const resRow = document.createElement('tr');
+                resRow.innerHTML = `
+                    <td>${reservation.id}</td>
+                    <td>${reservation.date}</td>
+                    <td>${reservation.time}</td>
+                    <td>${reservation.guests} orang</td>
+                    <td>${reservation.status}</td>
+                `;
+                reservationHistoryContainer.appendChild(resRow);
+            });
+        }
+        
+        // Set up event listeners
+        function setupEventListeners() {
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.dataset.category;
+                    filterMenuItems(category);
+                });
+            });
+            
+            // Search box
+            searchBox.addEventListener('input', function() {
+                searchMenuItems(this.value);
+            });
+            
+            // Cart toggle
+            cartIcon.addEventListener('click', function() {
+                cartSection.style.display = cartSection.style.display === 'block' ? 'none' : 'block';
+                favoriteSection.style.display = 'none';
+                profileSection.style.display = 'none';
+                
+                if (cartSection.style.display === 'block') {
+                    window.scrollTo({
+                        top: cartSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+            
+            // Favorite toggle
+            favoriteIcon.addEventListener('click', function() {
+                if (!currentUser) {
+                    showNotification("Silahkan login untuk melihat favorit!");
+                    authModal.style.display = 'flex';
+                    return;
+                }
+                
+                favoriteSection.style.display = favoriteSection.style.display === 'block' ? 'none' : 'block';
+                cartSection.style.display = 'none';
+                profileSection.style.display = 'none';
+                
+                if (favoriteSection.style.display === 'block') {
+                    renderFavoriteItems();
+                    window.scrollTo({
+                        top: favoriteSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+            
+            // Profile toggle
+            profileIcon.addEventListener('click', function() {
+                if (!currentUser) {
+                    showNotification("Silahkan login untuk melihat profil!");
+                    authModal.style.display = 'flex';
+                    return;
+                }
+                
+                profileSection.style.display = profileSection.style.display === 'block' ? 'none' : 'block';
+                cartSection.style.display = 'none';
+                favoriteSection.style.display = 'none';
+                
+                if (profileSection.style.display === 'block') {
+                    window.scrollTo({
+                        top: profileSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+            
+            // Continue shopping button
+            document.querySelector('.continue-shopping').addEventListener('click', function() {
+                cartSection.style.display = 'none';
+                window.scrollTo({
+                    top: document.getElementById('menu').offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Checkout button
+            document.querySelector('.checkout-btn').addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Keranjang Anda kosong. Silahkan tambahkan item terlebih dahulu.');
+                    return;
+                }
+                
+                cartSection.style.display = 'none';
+                window.scrollTo({
+                    top: document.getElementById('order').offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Form submission
+            document.getElementById('orderForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (cart.length === 0) {
+                    alert('Keranjang Anda kosong. Silahkan tambahkan item terlebih dahulu.');
+                    return;
+                }
+                
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('address').value;
+                const orderType = document.getElementById('orderType').value;
+                const payment = document.getElementById('payment').value;
+                const notes = document.getElementById('notes').value;
+                
+                // Calculate total
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                // Create order object
+                const order = {
+                    id: 'ORD-' + Date.now(),
+                    date: new Date().toLocaleDateString('id-ID'),
+                    items: [...cart],
+                    total,
+                    status: 'Diproses'
+                };
+                
+                // Save to order history
+                orderHistory.unshift(order);
+                saveOrderHistoryToLocalStorage();
+                
+                // Build order summary
+                let orderSummary = `Terima kasih ${name}, pesanan Anda telah diterima!\n\n`;
+                orderSummary += `ID Pesanan: ${order.id}\n`;
+                orderSummary += `Tanggal: ${order.date}\n`;
+                orderSummary += `No. Telepon: ${phone}\n`;
+                orderSummary += `Jenis Pesanan: ${getOrderTypeText(orderType)}\n`;
+                
+                if (orderType === 'delivery') {
+                    orderSummary += `Alamat Pengiriman: ${address}\n`;
+                }
+                
+                orderSummary += `Metode Pembayaran: ${getPaymentText(payment)}\n\n`;
+                orderSummary += `Detail Pesanan:\n`;
+                
+                cart.forEach(item => {
+                    orderSummary += `- ${item.name} (${item.quantity}x) = Rp ${(item.price * item.quantity).toLocaleString()}\n`;
+                });
+                
+                orderSummary += `\nTotal: Rp ${total.toLocaleString()}`;
+                
+                if (notes) {
+                    orderSummary += `\n\nCatatan: ${notes}`;
+                }
+                
+                orderSummary += `\n\nPesanan Anda akan segera diproses.`;
+                
+                alert(orderSummary);
+                
+                // Reset form and cart
+                this.reset();
+                cart = [];
+                updateCartUI();
+                saveCartToLocalStorage();
+                
+                // Update order history
+                renderOrderHistory();
+            });
+            
+            // Reservation form submission
+            document.getElementById('reservationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('resName').value;
+                const phone = document.getElementById('resPhone').value;
+                const date = document.getElementById('resDate').value;
+                const time = document.getElementById('resTime').value;
+                const guests = document.getElementById('resGuests').value;
+                const type = document.getElementById('resType').value;
+                const notes = document.getElementById('resNotes').value;
+                
+                // Create reservation object
+                const reservation = {
+                    id: 'RES-' + Date.now(),
+                    name,
+                    phone,
+                    date: new Date(date).toLocaleDateString('id-ID'),
+                    time,
+                    guests,
+                    type,
+                    notes,
+                    status: 'Dikonfirmasi'
+                };
+                
+                // Save to reservation history
+                reservationHistory.unshift(reservation);
+                saveReservationHistoryToLocalStorage();
+                
+                // Build reservation summary
+                let reservationSummary = `Terima kasih ${name}, reservasi Anda telah diterima!\n\n`;
+                reservationSummary += `ID Reservasi: ${reservation.id}\n`;
+                reservationSummary += `Tanggal: ${reservation.date}\n`;
+                reservationSummary += `Waktu: ${time}\n`;
+                reservationSummary += `Jumlah Tamu: ${guests} orang\n`;
+                reservationSummary += `Tipe Meja: ${getReservationTypeText(type)}\n`;
+                
+                if (notes) {
+                    reservationSummary += `Catatan: ${notes}\n`;
+                }
+                
+                reservationSummary += `\nStatus: ${reservation.status}`;
+                reservationSummary += `\n\nKami menunggu kedatangan Anda di IDO Café!`;
+                
+                alert(reservationSummary);
+                
+                // Reset form
+                this.reset();
+                
+                // Update reservation history
+                renderReservationHistory();
+            });
+            
+            // Profile form submission
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!currentUser) return;
+                
+                currentUser.name = document.getElementById('editName').value;
+                currentUser.email = document.getElementById('editEmail').value;
+                currentUser.phone = document.getElementById('editPhone').value;
+                currentUser.address = document.getElementById('editAddress').value;
+                
+                saveUserToLocalStorage();
+                updateProfileUI();
+                showNotification('Profil berhasil diperbarui!');
+            });
+            
+            // Newsletter form submission
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                if (emailInput.value) {
+                    showNotification('Terima kasih telah berlangganan newsletter kami!');
+                    emailInput.value = '';
+                }
+            });
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    // If it's a section link
+                    if (targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Hide cart and favorite sections
+                        cartSection.style.display = 'none';
+                        favoriteSection.style.display = 'none';
+                        profileSection.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Modal close events
+            closeModal.addEventListener('click', closeProductModal);
+            closeModalBtn.addEventListener('click', closeProductModal);
+            closeAuthModal.addEventListener('click', function() {
+                authModal.style.display = 'none';
+            });
+            
+            // Modal tab switching
+            document.querySelectorAll('.modal-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}Content`).classList.add('active');
+                });
+            });
+            
+            // Add to cart from modal
+            addToCartModal.addEventListener('click', function() {
+                if (currentProduct) {
+                    addToCart(currentProduct.id, currentProduct.name, currentProduct.price);
+                    closeProductModal();
+                }
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === productModal) {
+                    closeProductModal();
+                }
+                if (e.target === authModal) {
+                    authModal.style.display = 'none';
+                }
+            });
+            
+            // Auth tab switching
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (tabId === 'login') {
+                        loginContent.style.display = 'block';
+                        registerContent.style.display = 'none';
+                    } else {
+                        loginContent.style.display = 'none';
+                        registerContent.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Login button
+            loginBtn.addEventListener('click', function() {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                login(email, password);
+            });
+            
+            // Register button
+            registerBtn.addEventListener('click', function() {
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const phone = document.getElementById('registerPhone').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    showNotification('Password dan konfirmasi password tidak sama!');
+                    return;
+                }
+                
+                register(name, email, phone, password);
+            });
+            
+            // Profile tab switching
+            profileTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    profileTabs.forEach(t => t.classList.remove('active'));
+                    profileContents.forEach(c => c.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}Content`).classList.add('active');
+                    
+                    // Populate form if settings tab
+                    if (tabId === 'settings' && currentUser) {
+                        document.getElementById('editName').value = currentUser.name;
+                        document.getElementById('editEmail').value = currentUser.email;
+                        document.getElementById('editPhone').value = currentUser.phone;
+                        document.getElementById('editAddress').value = currentUser.address || '';
+                    }
+                });
+            });
+        }
+        
+        // Helper functions
+        function getOrderTypeText(type) {
+            const types = {
+                'dine-in': 'Makan di Tempat',
+                'takeaway': 'Takeaway',
+                'delivery': 'Delivery'
+            };
+            return types[type] || type;
+        }
+        
+        function getPaymentText(payment) {
+            const payments = {
+                'cash': 'Cash (Bayar di Tempat)',
+                'gopay': 'Gopay',
+                'ovo': 'OVO',
+                'dana': 'DANA',
+                'transfer': 'Transfer Bank'
+            };
+            return payments[payment] || payment;
+        }
+        
+        function getReservationTypeText(type) {
+            const types = {
+                'standard': 'Standard',
+                'window': 'Near Window',
+                'private': 'Private Booth',
+                'outdoor': 'Outdoor'
+            };
+            return types[type] || type;
+        }
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
